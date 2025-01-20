@@ -174,13 +174,23 @@ function GoalMap({ goal, onBack }) {
             type="date"
             name="start"
             value={goalData.period.start}
-            onChange={handleChange}
+            onChange={(e) =>
+              setGoalData((prevGoal) => ({
+                ...prevGoal,
+                period: { ...prevGoal.period, start: e.target.value },
+              }))
+            }
           />
           <input
             type="date"
             name="end"
             value={goalData.period.end}
-            onChange={handleChange}
+            onChange={(e) =>
+              setGoalData((prevGoal) => ({
+                ...prevGoal,
+                period: { ...prevGoal.period, end: e.target.value },
+              }))
+            }
           />
         </div>
         <div>
@@ -250,7 +260,6 @@ function App() {
     setGoals([...goals, newGoal]);
   };
 
-  // コンポーネントのマウント時にlocalStorageからデータを読み込む
   useEffect(() => {
     const storedGoal = localStorage.getItem("selectedGoal");
     const storedActualData = localStorage.getItem("actualData");
